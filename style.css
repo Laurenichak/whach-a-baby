@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Madimi+One&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Madimi One", sans-serif;
+    background-color: #FFB7CE;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    /* Adjust based on your preference */
+    gap: 10px;
+    justify-content: center;
+    color: blueviolet;
+}
+
+h1 {
+    text-shadow: 2px 2px #000000;
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+}
+
+.endgame-modal,
+#restart-btn {
+    display: grid;
+}
+
+.hole {
+    width: 120px;
+    /* Or your desired size */
+    height: 120px;
+    border-radius: 50%;
+    /* Makes it round */
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    /* Gradient background */
+    border: 3px solid #000000;
+    /* Gives a frame-like appearance */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Ensures nothing spills out of the hole */
+    position: relative;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+
+.mole {
+    width: 100%;
+    /* Adjust based on your hole size */
+    height: 100%;
+    /* Adjust based on your hole size */
+    background-image: url('baby.png');
+    background-size: cover;
+    /* Cover ensures the image covers the mole area */
+    background-position: center;
+    /* Centers the image */
+    display: none;
+    /* Hide by default, shown by JavaScript */
+    cursor: pointer;
+    /* Change cursor on hover to indicate it can be clicked */
+    display: none;
+    /* Hide by default, will be overridden by JavaScript */
+    animation: pop 0.5s;
+    /* Animation called 'pop' that lasts 0.5 seconds */
+    transition: transform 0.1s;
+
+}
+
+.button:hover {
+    background-color: #f0a;
+    transition: background-color 0.3s;
+}
+
+.mole.whacked {
+    transform: scale(0);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.endgame-modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+
+}
+
+.endgame-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Press Start 2P', cursive;
+
+}
+
+/* Entry Page CSS */
+.entry-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background: #FFB7CE;
+    background-image: url("baby.png");
+    display: flex;
+    /* Hide initially */
+}
+
+#start-game-btn {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #FFB7CE;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-top: 20px;
+}
+
+.score-board,
+.timer {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    /* To contain the width to its content */
+    font-family: 'Press Start 2P', cursive;
+
+}
+
+.restart-btn {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #FFB7CE;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    display: grid;
+    /* Hide initially */
+}
+
+.countdown-modal {
+    display: none;
+    /* Hidden by default, shown during countdown */
+    position: fixed;
+    /* Fixed position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 192, 203, 0.9);
+    /* Light pink background with opacity */
+    z-index: 10;
+    /* Make sure it's above other elements */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.countdown-content {
+    font-size: 3em;
+    /* Large text size */
+    font-weight: bold;
+    color: #fff;
+    /* White text color */
+    background: #ff69b4;
+    /* Vibrant pink background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Press Start 2P', cursive;
+
+}
+
+/* If you're also using animations to fade out the modal */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Apply the animation to the modal after countdown */
+.countdown-modal.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#start-game {
+    animation: pulse 2s infinite;
+}
+
+#start-game {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 22px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 22px;
+    transition: background-color 0.3s;
+}
+
+#start-game:hover {
+    background-color: #ff69b4;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.instruction-icon {
+    width: 30px;
+    /* Adjust size as needed */
+    margin-right: 10px;
+}
+
+.entry-background {
+    background: #FFB7CE;
+    background-image: url("baby.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.entry-content {
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    max-width: 800px;
+}
+
+.feature-img {
+    max-width: 100px;
+    /* Adjust based on your preference */
+    margin: 20px auto;
+}
+
+#start-game {
+    background-color: #ff477e;
+    color: white;
+    border: none;
+    padding: 20px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 23px;
+    transition: background-color 0.3s ease;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#start-game:hover {
+    background-color: #ff2f5a;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.score-pop {
+    animation: pop 0.5s ease;
+}
+
+
+.endgame-modal,
+.leaderboard {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.endgame-modal {
+    display: none;
+    /* Initially hidden */
+    /* Other styling */
+}
+
+.endgame-modal.active {
+    display: flex;
+    /* Show when active */
+    /* Ensure this class is added in your JavaScript when showing the modal */
+}
+
+input[type="text"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#username,
+#submit-score,
+#restart-game {
+    display: block;
+    /* Ensure visibility */
+    margin: 10px auto;
+    /* Example spacing */
+}

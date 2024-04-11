@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Baby</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Whack-a-Baby!</h1>
+    <div class="score-board">Score: <span class="score">0</span></div> <br>
+    <!-- Add this in your index.html within the body tag -->
+    <div class="countdown-modal" style="display: none;">
+        <div class="countdown-content"></div>
+    </div>
+
+    <div class="game-board">
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+        <div class="hole">
+            <div class="mole"></div>
+        </div>
+    </div> <br></br>
+    <div class="timer">Time Left: <span class="time-left">20</span> Seconds</div>
+    <div class="endgame-modal" style="display: none;">
+        <div class="endgame-content">Game over! Your final score is: <span class="final-score">0</span></div>
+        <button id="close-modal" onclick="closeEndGameModal()">Restart</button>
+        <input type="text" id="username" placeholder="Enter your name" />
+        <button id="submit-score">Submit Score</button>
+        <button id="restart-game">Restart Game</button>
+    </div>
+    <div class="leaderboard">
+        <h2>Leaderboard</h2>
+        <table id="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Leaderboard entries will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <button id="restart-btn" class="restart-btn">Restart Game</button>
+    <script src="game.js"></script>
+</body>
+
+</html>
